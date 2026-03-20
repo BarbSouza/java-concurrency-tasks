@@ -1,26 +1,34 @@
 package org.example;
 
 import java.io.*;
-public java.io.BufferedReader;
+import java.util.*;
+
 
 public class CSVReader {
 
-    public static double[] readCSV(String fileName) throws IOException {
-        List<double> data = new ArrayList<>();
-    }
+    public static double[] readCSV(String filePath) throws IOException {
+        List<Double> data = new ArrayList<>();
 
-    String fileName = "data.csv";
-    String line;
 
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        while ((line = br.readLine()) != null) {
-            String[] values = line.split(COMMA_DELIMITER);
-            for (String value : values) {
-                data.add(Double.parseDouble(value.trim()))
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                for (String value : values) {
+                    data.add(Double.parseDouble(value.trim()));
+                }
             }
+
+            double[] result = new double[data.size()];
+            for (int i = 0; i < data.size(); i++) {
+                result[i] = data.get(i);
+
         }
-        br.close();
+            return result;
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+            throw e;
+        }
 
     }
-
 }
