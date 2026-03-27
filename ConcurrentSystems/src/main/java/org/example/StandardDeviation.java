@@ -112,7 +112,31 @@ public class StandardDeviation {
             totalSum += sumThread.partialSum;
         }
         double mean = totalSum / n;
+        System.out.println("Total sum: " + totalSum + ", Mean: " + mean);
 
-        return totalSum;
+        // Step 2: Calculate variance using threads
+        VarianceThread[] varianceThreads = new VarianceThread[numThreads];
+
+        // Create and start threads to calculate partial sums of squared differences
+        for (int i = 0; i < numThreads; i++) {
+            int start = i * chunkSize;
+            int end = Math.min(start + chunkSize, n);
+            varianceThreads[i] = new VarianceThread(data, start, end, mean);
+            threads[i] = new Thread(varianceThreads[i]);
+            threads[i].start();
+        }
+
+        // Wait for all variance threads to finish
+        for (Thread thread : threads) {
+            thread.join();
+        }
+
+        // Calculate total sum of squared differences
+        double totalSquaredDiff = 0;
+        for (VarianceThread varianceThread : varianceThreads) {
+            totalSquaredDiff += varianceThread.partialSum;
+        }
+        // Step 3: Return standard deviation
+        return Math.sqrt(totalSquaredDiff / n);
     }
 }
