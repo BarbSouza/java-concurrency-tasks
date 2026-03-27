@@ -22,8 +22,7 @@ public class CSVReader {
             double[] result = new double[data.size()];
             for (int i = 0; i < data.size(); i++) {
                 result[i] = data.get(i);
-
-        }
+            }
             return result;
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());

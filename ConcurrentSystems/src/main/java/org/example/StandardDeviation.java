@@ -1,23 +1,34 @@
 package org.example;
 
+import java.sql.SQLOutput;
+
 public class StandardDeviation {
-    public static double calculateStandardDeviation(double[] data) {
-        double mean = calculateMean(data);
-        double sumSquaredDifferences = 0.0;
 
-        for (double value : data) {
-            sumSquaredDifferences += Math.pow(value - mean, 2);
+    public class SumThread extends Thread {
+        private double[] data;
+        private int start;
+        private int end;
+        private double sum;
+        double partialSum = 0;
+
+        public SumThread(double[] data, int start, int end) {
+            this.data = data;
+            this.start = start;
+            this.end = end;
         }
 
-        return Math.sqrt(sumSquaredDifferences / data.length);
-    }
-
-    private static double calculateMean(double[] data) {
-        double sum = 0.0;
-        for (double value : data) {
-            sum += value;
+        @Override
+        public void run() {
+            System.out.println("Thread " + Thread.currentThread().getName() + " calculating sum from index " + start + " to " + (end - 1));
+            sum = 0;
+            for (int i = start; i < end; i++) {
+                sum += data[i];
+            }
         }
-        return sum / data.length;
+
+        public double getSum() {
+            return sum;
+        }
     }
 
 }
