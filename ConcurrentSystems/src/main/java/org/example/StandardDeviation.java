@@ -1,6 +1,8 @@
 package org.example;
 
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class StandardDeviation {
 
     // Runnable class to calculate the sum of a portion of the data
@@ -8,7 +10,7 @@ public class StandardDeviation {
         private double[] data;
         private int start;
         private int end;
-        double partialSum = 0; // instance variable
+        double partialSum = 0; // instance variable to store the sum for this thread's portion of the data
         /*
         Each thread will calculate the sum of a portion of the data and store it in partialSum
         This avoids the need for synchronization since each thread writes to its own variable
@@ -16,18 +18,24 @@ public class StandardDeviation {
         This design follows the CountThreadRefactor pattern where each thread is responsible for a specific portion of the data and stores its result in an instance variable
          */
 
+        static AtomicInteger threadCounter = new AtomicInteger(0);
+        int threadID;
+
+
         public SumThread(double[] data, int start, int end) {
             this.data = data;
             this.start = start;
             this.end = end;
+            this.threadID = threadCounter.incrementAndGet();
         }
 
         @Override
         public void run() {
-            System.out.println("Thread " + Thread.currentThread().getName() + " calculating sum from index " + start + " to " + (end - 1));
+            System.out.println("SumThread " + threadID + " calculating sum from index " + start + " to " + (end - 1));
             for (int i = start; i < end; i++) {
                 partialSum += data[i];
             }
+            System.out.println("SumThread " + threadID + " finished calculating sum. Partial sum: " + partialSum);
         }
     }
 
@@ -37,22 +45,27 @@ public class StandardDeviation {
         private int start;
         private int end;
         private double mean;
-        double partialSum = 0;
+        double partialSum = 0; // instance variable to store the sum of squared differences for this thread's portion of the data
+
+        static AtomicInteger threadCounter = new AtomicInteger(0);
+        int threadID;
 
         public VarianceThread(double[] data, int start, int end, double mean) {
             this.data = data;
             this.start = start;
             this.end = end;
             this.mean = mean;
+            this.threadID = threadCounter.incrementAndGet();
         }
 
         @Override
         public void run() {
-            System.out.println("Thread " + Thread.currentThread().getName() + " calculating variance from index " + start + " to " + (end - 1));
+            System.out.println("SumThread " + threadID + " calculating variance from index " + start + " to " + (end - 1));
             for (int i = start; i < end; i++) {
                 double diff = data[i] - mean;
                 partialSum += diff * diff;
             }
+            System.out.println("SumThread " + threadID + " finished calculating variance. Partial sum of squared differences: " + partialSum);
         }
     }
     // Main method to calculate standard deviation using multiple threads
