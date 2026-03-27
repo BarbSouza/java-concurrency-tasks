@@ -9,6 +9,12 @@ public class StandardDeviation {
         private int start;
         private int end;
         double partialSum = 0; // instance variable
+        /*
+        Each thread will calculate the sum of a portion of the data and store it in partialSum
+        This avoids the need for synchronization since each thread writes to its own variable
+        The main thread will later read these partial sums to calculate the total sum and mean
+        This design follows the CountThreadRefactor pattern where each thread is responsible for a specific portion of the data and stores its result in an instance variable
+         */
 
         public SumThread(double[] data, int start, int end) {
             this.data = data;
