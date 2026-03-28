@@ -19,6 +19,19 @@ public class Main {
 
             // Task 3: Matrix Multiplication
         System.out.println("\n--- Matrix Multiplication ---");
+        double[][][] matrices = MatrixMultiplication.splitMatrices(number);
+        double[][] A = matrices[0];
+        double[][] B = matrices[1];
+
+        System.out.println("Matrix A:");
+        MatrixMultiplication.printMatrix(A);
+        System.out.println("Matrix B:");
+        MatrixMultiplication.printMatrix(B);
+
+        double[][] result = MatrixMultiplication.multiply(A, B);
+        System.out.println("Result of A x B:");
+        MatrixMultiplication.printMatrix(result);
+        System.out.println("\n------------------");
 
         // Task 4: Merge Sort
         System.out.println("\n--- Merge Sort ---");

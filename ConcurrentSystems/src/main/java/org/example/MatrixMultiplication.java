@@ -46,4 +46,14 @@ public class MatrixMultiplication {
         return result;
     }
 
+    // Method to print a matrix
+    public static void printMatrix(double[][] matrix) {
+        for (double[] row : matrix) {
+            for (double value : row) {
+                System.out.printf("%8.1f ", value);
+            }
+            System.out.println();
+        }
+    }
+
 }
