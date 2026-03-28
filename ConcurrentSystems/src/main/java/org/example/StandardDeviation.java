@@ -65,12 +65,12 @@ public class StandardDeviation {
 
         @Override
         public void run() {
-            System.out.println("SumThread " + threadID + " calculating variance from index " + start + " to " + (end - 1));
+            System.out.println("VarianceThread " + threadID + " calculating variance from index " + start + " to " + (end - 1));
             for (int i = start; i < end; i++) {
                 double diff = data[i] - mean;
                 partialSum += diff * diff;
             }
-            System.out.println("SumThread " + threadID + " finished calculating variance. Partial sum of squared differences: " + partialSum);
+            System.out.println("VarianceThread " + threadID + " finished calculating variance. Partial sum of squared differences: " + partialSum);
         }
     }
     // Main method to calculate standard deviation using multiple threads
