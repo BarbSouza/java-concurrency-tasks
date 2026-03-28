@@ -28,4 +28,22 @@ public class MatrixMultiplication {
 
         return new double[][][]{matrixA, matrixB};
     }
+
+    // Method to perform matrix multiplication
+    public static double[][] multiply(double[][] A, double[][] B) {
+        int size = A.length;
+        double[][] result = new double[size][size];
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                double sum = 0;
+                for (int k = 0; k < size; k++) {
+                    sum += A[i][k] * B[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+        return result;
+    }
+
 }
