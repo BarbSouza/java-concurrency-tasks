@@ -16,10 +16,22 @@ public class MergeSort {
 
     static AtomicInteger threadCount = new AtomicInteger(0);
 
+    static class MergeSortTask extends RecursiveAction {
+        private double[] data;
+        private int left;
+        private int right;
+
+        MergeSortTask(double[] data, int left, int right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
+
+        @Override
+        protected void compute() {
 
 
 
-            }
         }
     }
 
