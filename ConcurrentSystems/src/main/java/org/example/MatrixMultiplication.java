@@ -32,7 +32,7 @@ public class MatrixMultiplication {
     }
 
     // Runnable task for calculating a portion of the resulting matrix
-    public class RowTask implements Runnable {
+    static class RowTask implements Runnable {
         private double[][] A;
         private double[][] B;
         private double[][] result;
@@ -68,20 +68,24 @@ public class MatrixMultiplication {
         }
     }
 
-    // Method to perform matrix multiplication
-    public static double[][] multiply(double[][] A, double[][] B) {
+    // Method to perform matrix multiplication using multiple threads
+    public static double[][] multiply(double[][] A, double[][] B, int numThreads) throws InterruptedException {
         int size = A.length;
         double[][] result = new double[size][size];
+        int chunkSize =  (size + numThreads - 1) / numThreads;
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                double sum = 0;
-                for (int k = 0; k < size; k++) {
-                    sum += A[i][k] * B[k][j];
-                }
-                result[i][j] = sum;
+            Thread[] threads = new Thread[numThreads];
+        for (int i = 0; i < numThreads; i++) {
+                int startRow = i * chunkSize;
+                int endRow = Math.min(startRow + chunkSize, size);
+                threads[i] = new Thread(new RowTask(A, B, result, startRow, endRow));
+                threads[i].start();
             }
+
+        for (Thread thread : threads) {
+            thread.join();
         }
+
         return result;
     }
 

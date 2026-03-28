@@ -28,7 +28,7 @@ public class Main {
         System.out.println("Matrix B:");
         MatrixMultiplication.printMatrix(B);
 
-        double[][] result = MatrixMultiplication.multiply(A, B);
+        double[][] result = MatrixMultiplication.multiply(A, B, numThreads);
         System.out.println("Result of A x B:");
         MatrixMultiplication.printMatrix(result);
         System.out.println("\n------------------");
