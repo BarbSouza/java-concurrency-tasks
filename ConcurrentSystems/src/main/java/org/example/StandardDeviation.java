@@ -3,6 +3,11 @@ package org.example;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/** * This class calculates the standard deviation of a dataset using multiple threads.
+ * It uses two types of threads: SumThread to calculate the total sum for mean calculation, and VarianceThread to calculate the sum of squared differences for variance calculation.
+ * The main method, calculateStandardDeviation, orchestrates the creation and execution of these threads and combines their results to return the final standard deviation.
+ */
+
 public class StandardDeviation {
 
     // Runnable class to calculate the sum of a portion of the data
