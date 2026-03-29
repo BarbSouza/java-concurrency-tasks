@@ -89,6 +89,9 @@ public class StandardDeviation {
         Wait for all threads to finish using join().
         Sum up the partial sums from all threads to get the total sum and calculate the mean.
          */
+        // Reset thread counters for SumThread and VarianceThread
+        SumThread.threadCounter.set(0);
+        VarianceThread.threadCounter.set(0);
         int n = data.length;
         if (n == 0) return 0.0;
 
