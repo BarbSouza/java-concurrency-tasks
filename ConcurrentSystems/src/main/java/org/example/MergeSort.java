@@ -32,6 +32,15 @@ public class MergeSort {
 
         }
 
+        private static void sequentialSort(double[] data, int left, int right) {
+            if (left < right) {
+                int mid = (left + right) / 2;
+                sequentialSort(data, left, mid);
+                sequentialSort(data, mid + 1, right);
+                merge(data, left, mid, right);
+            }
+        }
+
         private static void merge(double[] data, int left, int mid, int right) {
             int leftSize = mid - left + 1;
             int rightSize = right - mid;
