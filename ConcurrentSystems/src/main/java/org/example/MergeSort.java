@@ -11,11 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class MergeSort {
-
+    // Threshold for switching to sequential sort
     private static final int THRESHOLD = 25;
-
+    // AtomicInteger to keep track of the number of threads created during the sorting process
     static AtomicInteger threadCount = new AtomicInteger(0);
 
+    // RecursiveAction is used for tasks that don't return a result (void)
     static class MergeSortTask extends RecursiveAction {
         private double[] data;
         private int left;
@@ -27,6 +28,7 @@ public class MergeSort {
             this.right = right;
         }
 
+        // The compute method is where the sorting logic is implemented
         @Override
         protected void compute() {
             if ((right - left) <= THRESHOLD) {
@@ -36,7 +38,7 @@ public class MergeSort {
                 MergeSortTask leftTask = new MergeSortTask(data, left, mid);
                 MergeSortTask rightTask = new MergeSortTask(data, mid + 1, right);
                 System.out.println("Splitting [" + left + " to " + right + "] → left:[" + left + " to " + mid + "] right:[" + (mid+1) + " to " + right + "]");
-                
+
                 threadCount.incrementAndGet();
                 leftTask.fork();
                 rightTask.compute();
@@ -47,6 +49,7 @@ public class MergeSort {
         }
     }
 
+    // This method performs a sequential merge sort on a portion of the array defined by left and right indices
     private static void sequentialSort(double[] data, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -56,6 +59,7 @@ public class MergeSort {
         }
     }
 
+    // This method merges two sorted subarrays back into a single sorted array
     private static void merge(double[] data, int left, int mid, int right) {
         int leftSize = mid - left + 1;
         int rightSize = right - mid;
@@ -89,7 +93,7 @@ public class MergeSort {
         }
 
     }
-
+    // This method is the entry point for sorting an array of doubles using the concurrent merge sort algorithm
     public static void sort(double[] data) {
         ForkJoinPool pool = new ForkJoinPool();
         pool.invoke(new MergeSortTask(data, 0, data.length - 1));
