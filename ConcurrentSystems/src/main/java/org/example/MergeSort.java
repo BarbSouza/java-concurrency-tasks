@@ -90,4 +90,10 @@ public class MergeSort {
 
     }
 
+    public static void sort(double[] data) {
+        ForkJoinPool pool = new ForkJoinPool();
+        pool.invoke(new MergeSortTask(data, 0, data.length - 1));
+
+    }
+
 }
