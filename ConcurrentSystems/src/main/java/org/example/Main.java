@@ -44,7 +44,7 @@ public class Main {
         }
         System.out.println("\n");
         MergeSort.sort(number);
-        System.out.println("Total threads used for merge sort: " + MergeSort.threadCount.get());
+        System.out.println("Total parallel tasks forked: " + MergeSort.threadCount.get());
         System.out.println("Sorted data (largest to smallest):");
         for (double value : number) {
             System.out.printf("%8.1f ", value);

@@ -30,14 +30,14 @@ public class MergeSort {
         @Override
         protected void compute() {
             if ((right - left) <= THRESHOLD) {
-                System.out.println("Thread " + threadCount.incrementAndGet() + " sorting from index " + left + " to " + right);
                 sequentialSort(data, left, right);
             } else {
                 int mid = (left + right) / 2;
                 MergeSortTask leftTask = new MergeSortTask(data, left, mid);
                 MergeSortTask rightTask = new MergeSortTask(data, mid + 1, right);
-                System.out.println("Splitting from index " + left + " to " + right + " into " + left + " at " + mid);
-
+                System.out.println("Splitting [" + left + " to " + right + "] → left:[" + left + " to " + mid + "] right:[" + (mid+1) + " to " + right + "]");
+                
+                threadCount.incrementAndGet();
                 leftTask.fork();
                 rightTask.compute();
                 leftTask.join();
