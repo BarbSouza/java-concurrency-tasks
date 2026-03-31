@@ -3,7 +3,18 @@ package org.example;
 import java.io.IOException;
 
 public class Main {
-    // Main method to execute the tasks
+    /**
+     * The main method serves as the entry point for the application.
+     * It orchestrates the execution of various tasks related to concurrent systems, including:
+     * loading data from a CSV file,
+     * calculating standard deviation using multiple threads,
+     * performing matrix multiplication,
+     * and sorting data using a parallel merge sort algorithm.
+     * Each task is executed sequentially, and the results are printed to the console for verification.
+     * @param args
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws IOException, InterruptedException {
 
         System.out.println("--- Concurrent Systems Tasks ---");

@@ -49,7 +49,12 @@ public class MergeSort {
         }
     }
 
-    // This method performs a sequential merge sort on a portion of the array defined by left and right indices
+    /**
+     * This method performs a sequential merge sort on a portion of the array defined by the left and right indices.
+     * @param data
+     * @param left
+     * @param right
+     */
     private static void sequentialSort(double[] data, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -59,7 +64,13 @@ public class MergeSort {
         }
     }
 
-    // This method merges two sorted subarrays back into a single sorted array
+    /**
+     * This method merges two sorted subarrays of data defined by the left, mid, and right indices.
+     * @param data
+     * @param left
+     * @param mid
+     * @param right
+     */
     private static void merge(double[] data, int left, int mid, int right) {
         int leftSize = mid - left + 1;
         int rightSize = right - mid;
@@ -93,7 +104,11 @@ public class MergeSort {
         }
 
     }
-    // This method is the entry point for sorting an array of doubles using the concurrent merge sort algorithm
+
+    /**
+     * This method initializes the ForkJoinPool and starts the sorting process by invoking the MergeSortTask on the entire array.
+     * @param data
+     */
     public static void sort(double[] data) {
         ForkJoinPool pool = new ForkJoinPool();
         pool.invoke(new MergeSortTask(data, 0, data.length - 1));

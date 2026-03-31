@@ -73,13 +73,16 @@ public class StandardDeviation {
             System.out.println("VarianceThread " + threadID + " finished calculating variance. Partial sum of squared differences: " + partialSum);
         }
     }
-    // Main method to calculate standard deviation using multiple threads
-    /*
-    Step 1: Calculate the mean using multiple threads (SumThread)
-    Step 2: Calculate the variance using multiple threads (VarianceThread)
-    Step 3: Return the standard deviation as sqrt(variance / n)
-    */
 
+    /**
+     * This method calculates the standard deviation of the given data array using the specified number of threads.
+     *     Step 1: Calculate the mean using multiple threads (SumThread)
+     *     Step 2: Calculate the variance using multiple threads (VarianceThread)
+     *     Step 3: Return the standard deviation as sqrt(variance / n)
+     * @param data
+     * @param numThreads
+     * @throws InterruptedException
+     */
     public static double calculateStandardDeviation(double[] data, int numThreads) throws InterruptedException  {
         /*
         Determine the number of elements in the data array (n).

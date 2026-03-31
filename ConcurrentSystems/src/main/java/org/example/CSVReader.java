@@ -6,6 +6,12 @@ import java.util.*;
 
 public class CSVReader {
 
+    /**
+     * This method reads a CSV file and returns its contents as an array of doubles.
+     * @param filePath
+     * @return An array of doubles containing the values read from the CSV file.
+     * @throws IOException
+     */
     public static double[] readCSV(String filePath) throws IOException {
         List<Double> data = new ArrayList<>();
 

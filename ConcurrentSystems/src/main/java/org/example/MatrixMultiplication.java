@@ -8,7 +8,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class MatrixMultiplication {
 
-    // Method to split the input data into two 10x10 matrices
+    /**
+     * This method takes a one-dimensional array of doubles and splits it into two 10x10 matrices.
+     * @param data
+     * @return A three-dimensional array containing the two 10x10 matrices.
+     */
     public static double[][][] splitMatrices(double[] data) {
         // Initialize two 10x10 matrices
         double[][] matrixA = new double[10][10];
@@ -68,7 +72,14 @@ public class MatrixMultiplication {
         }
     }
 
-    // Method to perform matrix multiplication using multiple threads
+    /**
+     * This method performs matrix multiplication of two matrices A and B using multiple threads.
+     * @param A
+     * @param B
+     * @param numThreads
+     * @return The resulting matrix after multiplication.
+     * @throws InterruptedException
+     */
     public static double[][] multiply(double[][] A, double[][] B, int numThreads) throws InterruptedException {
         int size = A.length;
         double[][] result = new double[size][size];
@@ -89,7 +100,10 @@ public class MatrixMultiplication {
         return result;
     }
 
-    // Method to print a matrix
+    /**
+     * This method prints a 2D matrix in a formatted manner.
+     * @param matrix
+     */
     public static void printMatrix(double[][] matrix) {
         for (double[] row : matrix) {
             for (double value : row) {
