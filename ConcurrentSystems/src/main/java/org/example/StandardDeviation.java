@@ -81,6 +81,7 @@ public class StandardDeviation {
      *     Step 3: Return the standard deviation as sqrt(variance / n)
      * @param data
      * @param numThreads
+     * @return The standard deviation of the data array calculated using multiple threads.
      * @throws InterruptedException
      */
     public static double calculateStandardDeviation(double[] data, int numThreads) throws InterruptedException  {
